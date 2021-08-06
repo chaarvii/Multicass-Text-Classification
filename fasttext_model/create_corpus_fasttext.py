@@ -1,8 +1,9 @@
 from tqdm import tqdm
 import csv
 import pandas as pd
+import argparse
 
-def create_corpus_fasttext(train_csv: str = 'dataset/train.csv', output: str = 'corpus_fasttext.txt', train_corpus: str = 'train_details.txt'):
+def create_corpus_fasttext(train_csv: str, output: str, train_corpus: str):
 	'''
 		This program appends the labels in the format expected by fasttext
 		Arguments:
@@ -29,3 +30,12 @@ def create_corpus_fasttext(train_csv: str = 'dataset/train.csv', output: str = '
 	corpus.close()
 
 	return output
+
+if __name__ == '__main__':
+	parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+	parser.add_argument('--csv', type = str, default = 'dataset/train.csv', help = 'Path to the csv file with labels')
+	parser.add_argument('--corpus', type = str, default = 'corpus_fasttext.txt', help = 'Path to the corresponding corpus file')
+	parser.add_argument('--output', type = str, default = 'train_details.txt', help = 'Path to the output file')
+	args = parser.parse_args()
+
+	create_corpus_fasttext(args['csv'], args['corpus'], args['output'])

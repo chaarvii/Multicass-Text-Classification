@@ -1,5 +1,6 @@
 import csv
 from tqdm import tqdm
+import argparse
 
 def create_predictions(header: list = ['PRODUCT_ID', 'BROWSE_NODE_ID']):
 	'''
@@ -30,3 +31,11 @@ def create_predictions(header: list = ['PRODUCT_ID', 'BROWSE_NODE_ID']):
 	f_submissions.close()
 
 	return 'predictions.csv'
+
+if __name__ == '__main__':
+	parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+	parser.add_argument('--header_first', type = str, default = 'PRODUCT_ID', help = 'First column heading')
+	parser.add_argument('--header_second', type = str, default = 'BROWSE_NODE_ID', help = 'Second column heading')
+	args = parser.parse_args()
+
+	create_corpus_fasttext([args['header_first'], args['header_second']])
