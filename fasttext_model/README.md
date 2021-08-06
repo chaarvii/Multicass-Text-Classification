@@ -62,7 +62,7 @@ python create_corpus_fasttext.py --csv path_to_csv_file --corpus path_to_corpus.
 
 It creates a ```path_to_output_file.txt``` file which contains the corpus ready to be fed into fasttext.
 
-Note: The aforementioned flags are optional. For more information, run ```python create_corpus_fasttext.py --help```.
+Note: The aforementioned flags are optional. For more information, run ```python create_corpus_fasttext.py --help``` or simply ```python create_corpus_fasttext.py -h```.
 
 ### create_predictions.py
 This script creates the ```predictions.csv``` from a ```predictions.txt``` . It is automatically called in the pipeline, however, if required, it can be run individually. The following format is to be used while executing it:
@@ -73,4 +73,4 @@ python create_predictions.py --header_first first_column_heading --header_second
 
 It creates a ```predictions.csv``` with all the predictions for each input case along with a serial number.
 
-Note: The aforementioned flags are optional. For more information, run ```python create_predictions.py --help```.
+Note: The aforementioned flags are optional. For more information, run ```python create_predictions.py --help``` or simply ```python create_predictions.py -h``.
