@@ -73,4 +73,27 @@ python create_predictions.py --header_first first_column_heading --header_second
 
 It creates a ```predictions.csv``` with all the predictions for each input case along with a serial number.
 
-Note: The aforementioned flags are optional. For more information, run ```python create_predictions.py --help``` or simply ```python create_predictions.py -h``.
+Note: The aforementioned flags are optional. For more information, run ```python create_predictions.py --help``` or simply ```python create_predictions.py -h```.
+
+### ensemble.sh
+This script creates multiple predictions from multiple models that are passed into it. To use it, execute the following command:
+```bash
+cd scripts
+./ensemble.sh path_to_test_corpus.txt 3 PRODUCT_NODE_ID BROWSE_NODE_ID trained_fasttext_model_1.bin trained_fasttext_model_2.bin trained_fasttext_model_3.bin
+```
+
+Any number of models can be passed as parameters. The second parameter is used to produce n-best predictions. In this case, 3 best predictions with their probabilities would be made. From all the predictions, the most confident prediction is chosen for the final prediction. The next two parameters are the headers, as explained in ```create_predictions.py```. Setting them to ```_``` will cause the program to use the default value.
+
+Multiple intermediate files are created which get deleted at the end. These are ```predictions_1.txt```, ```predictions_2.txt``` etc.
+
+Finally, a ```predictions.csv``` would be created with all the predictions for each input case along with a serial number.
+
+### ensemble.py
+This script combines all the prediction files created from the different models into one file. It is automatically called in the pipeline, however, if required, it can be run individually. The following format is to be used while executing it:
+```bash
+python ensemble.py --models 3
+```
+
+It creates a ```predictions.txt``` which contains each prediction seperated by ```\n```.
+
+For more information, execute ```python ensemble.py --help``` or simply ```python ensemble.py -h```.
