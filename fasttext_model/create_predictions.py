@@ -38,4 +38,8 @@ if __name__ == '__main__':
 	parser.add_argument('--header_second', type = str, default = 'BROWSE_NODE_ID', help = 'Second column heading')
 	args = parser.parse_args()
 
+	if args['header_first'] == '_' or args['header_second'] == '_':
+		args['header_first'] = 'PRODUCT_ID'
+		args['header_second'] = 'BROWSE_NODE_ID'
+		
 	create_corpus_fasttext([args['header_first'], args['header_second']])
