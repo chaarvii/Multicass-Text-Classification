@@ -1,11 +1,13 @@
 import re
-def remove_emoji(product_detail):
+def remove_emoji(product_detail: str):
     '''
-    Input: Text to be cleaned (String)
+            This function removes numeric characters from the text
+            Arguemts:
+            product_detail: String contating product details and labels. 
+            It assumes that the input is according to fasttext format
 
-    This function removes numeric characters from the text
-
-    Output: String
+            Output:
+            cleaned string in fasttext format
     '''
     emoji_pattern = re.compile("["
                            u"\U0001F600-\U0001F64F"  # emoticons
