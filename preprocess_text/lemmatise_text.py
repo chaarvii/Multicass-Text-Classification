@@ -27,7 +27,7 @@ def lemmatise_text(product_detail:str,remove_stopwords:bool):
     lemmatized = list()
 
     # performing lemmatisation and stemming, removing stopwords if true
-    for word in product_detail:
+    for word in tokens:
         lemma = word.lemma_.strip()
         if lemma:
             if not remove_stopwords or (remove_stopwords and lemma not in stops):
