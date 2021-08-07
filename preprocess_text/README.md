@@ -11,6 +11,6 @@ This script removes noise from the data and preprocesses it, thus making it read
 ```bash
 python preprocess_text.py --input path_to_input_file --output path_to_output_file.txt --remove_html set_false_to_retain --remove_digit set_false_to_retain --remove_emoticon set_false_to_retain --remove_stopwords set_false_to_retain
 ```
-It creates a ```path_to_output_file.txt``` file which contains the corpus ready to be fed into fasttext.
+It creates a ```path_to_output_file.txt``` file which contains preprocessed text
 
 Note: The aforementioned flags are optional. For more information, run ```preprocess_text.py --help``` or simply ```python preprocess_text.py -h```.
