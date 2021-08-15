@@ -1,8 +1,9 @@
+import csv
 import pandas as pd
 from tqdm import tqdm
 from collections import Counter
 
-def create_corpus(train_csv: str = '../dataset/train.csv') -> str:
+def create_corpus(train_csv = 'train_2.csv'):
 	'''
 		This function converts the input csv file(with multiple features in different columns and a label in the last column) 
 		into a txt file with each line as one entry. The multiple features are concatenated together
@@ -13,7 +14,7 @@ def create_corpus(train_csv: str = '../dataset/train.csv') -> str:
 		Returns a string which has the name of the created txt file. The file is located in the same directory as your input csv file.
 	'''
 	# Reading train_csv
-	df = pd.read_csv(train_csv)
+	df = pd.read_csv(train_csv, escapechar = "\\", quoting = csv.QUOTE_NONE)
 
 	# Creation of output file
 	corpus_folder = train_csv.split('/')
@@ -25,29 +26,32 @@ def create_corpus(train_csv: str = '../dataset/train.csv') -> str:
 		else:
 			corpus_name += folder +'/'
 
-	corpus_name += train.txt
+	corpus_name += 'train.txt'
 	f_corpus = open('train.txt', 'a')
 
 	# Appending the entries in the output file
 	label = df.keys()[-1]
 	for x in tqdm(range(len(df))):
-	corpus = ''
-	for y in df.keys():
+		corpus = ''
+		for y in df.keys():
 
-		# Break out if we are at the last column
-		if y == label:
-			break
+			# Break out if we are at the last column
+			if y == label:
+				break
 
-		# To handle entries which are NaN	
-		if not isinstance(df.iloc[x][y], str):
-			continue
-		else:
-			corpus += str(df.iloc[x][y]) + ' '
+			# To handle entries which are NaN	
+			if isinstance(df.iloc[x][y], float):
+				continue
+			else:
+				corpus += str(df.iloc[x][y]) + ' '
 		corpus += '\n'
-	f_corpus.write(corpus)
-	# To manage RAM with large corpora
-	del corpus
+		f_corpus.write(corpus)
+		# To manage RAM with large corpora
+		del corpus
 
 	# Completed creation of corpus
 	f_corpus.close()
 	return 'train.txt'
+
+if __name__ == '__main__':
+	create_corpus()

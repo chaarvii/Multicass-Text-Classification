@@ -22,10 +22,11 @@ def create_predictions(header: list = ['PRODUCT_ID', 'BROWSE_NODE_ID']):
 	# Writing to the csv file
 	writer.writerow(header)
 	for idx, pred in enumerate(tqdm(preds)):
-		try:
-			writer.writerow([idx+1, int(pred)])
-		except:
-			print(f'Exception at index {idx} - Prediction was {pred}')
+		# try:
+		if pred != preds[-1]:
+			writer.writerow([idx+1, int(float(pred))])
+		# except:
+		# 	print(f'Exception at index {idx} - Prediction was {pred}')
 
 	f_preds.close()
 	f_submissions.close()
@@ -38,8 +39,8 @@ if __name__ == '__main__':
 	parser.add_argument('--header_second', type = str, default = 'BROWSE_NODE_ID', help = 'Second column heading')
 	args = parser.parse_args()
 
-	if args['header_first'] == '_' or args['header_second'] == '_':
-		args['header_first'] = 'PRODUCT_ID'
-		args['header_second'] = 'BROWSE_NODE_ID'
+	if args.header_first == '_' or args.header_second == '_':
+		args.header_first = 'PRODUCT_ID'
+		args.header_second = 'BROWSE_NODE_ID'
 		
-	create_corpus_fasttext([args['header_first'], args['header_second']])
+	create_predictions([args.header_first, args.header_second])

@@ -30,4 +30,5 @@ Temporary Items
 *.vec
 
 *.txt
+*.csv
 __pycache__/

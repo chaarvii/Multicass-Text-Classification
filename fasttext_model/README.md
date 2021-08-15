@@ -97,3 +97,6 @@ python ensemble.py --models 3
 It creates a ```predictions.txt``` which contains each prediction seperated by ```\n```.
 
 For more information, execute ```python ensemble.py --help``` or simply ```python ensemble.py -h```.
+
+### Important Note
+In ```train.sh```, ```infer.sh``` and ```ensemble.sh``` wherever path is mentioned, make sure that path is relative to the ```fasttext_model/fastText``` folder. Absolute paths will work as well.

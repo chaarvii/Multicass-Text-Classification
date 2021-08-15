@@ -3,11 +3,11 @@ import csv
 import pandas as pd
 import argparse
 
-def create_corpus_fasttext(train_csv: str, output: str, train_corpus: str):
+def create_corpus_fasttext(train_csv, train_corpus, output):
 	'''
 		This program appends the labels in the format expected by fasttext
 		Arguments:
-		train_csv: String which gives the path to the training csv file. It assumes the labels to be in the last column
+		train_csv: String which gives the path to the training csv file. It assumes the labels to be in the last column.
 		output: String which gives the path to the output training file.
 		train_corpus: String which gives the path to the preprocessed corpus.
 		
@@ -16,13 +16,15 @@ def create_corpus_fasttext(train_csv: str, output: str, train_corpus: str):
 
 	'''
 	# Reading and opening the required files
-	df = pd.read_csv(train_csv)
-	corpus = open(output)
-	output_labels = open(train_corpus)
+	df = pd.read_csv(train_csv, escapechar = "\\", quoting = csv.QUOTE_NONE)
+	corpus = open(train_corpus)
+	output_labels = open(output, 'a')
 	label = df.keys()[-1]
+	lines = corpus.readlines()
+	print(lines[-1])
 
 	# Appending the labels to the output txt file
-	for idx,line in enumerate(tqdm(corpus.readlines())):
+	for idx,line in enumerate(tqdm(lines)):
 		line = line.replace('\n','')
 		output_labels.write(line + " " + "__label__" + str(df[label].iloc[idx]) + '\n')
 
@@ -38,4 +40,4 @@ if __name__ == '__main__':
 	parser.add_argument('--output', type = str, default = 'train_details.txt', help = 'Path to the output file')
 	args = parser.parse_args()
 
-	create_corpus_fasttext(args['csv'], args['corpus'], args['output'])
+	create_corpus_fasttext(args.csv, args.corpus, args.output)
