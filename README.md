@@ -6,14 +6,20 @@ This code was used in the Amazon ML Challenge 2021(https://www.hackerearth.com/c
 ## FastText
 FastText is a module provided by Facebook Research. More information about the module can be find in their GitHub repository(https://github.com/facebookresearch/fastText) and on their website(https://fasttext.cc). Our repository gives an upper level API that allows one to work with the fastText text classifcation model. We provide an API to generate the required files, train and infer from the model on your own data. 
 
-## Installation and Setup
+# Installation and Setup
 
 The following code should be run in order to initialise the different scripts.
 
 ```bash
+cd scripts
 chmod +x init.sh
 ./init.sh
+cd ..
+pip install -r requirements.txt
 ```
+
+# Data Preparation and Execution
+Running ```python main.py``` will start the pipeline. Ensure that you have your equivalent of ```train.csv``` and ```test.csv``` in the dataset folder. The possible flags can be viewed by running ```python main.py --help``` or simply ```python main.py -h```. 
 
 ## Scripts
 This section will discuss the function of all the scripts, their inputs and how to use them.
@@ -99,7 +105,7 @@ It creates a ```predictions.txt``` which contains each prediction seperated by `
 For more information, execute ```python ensemble.py --help``` or simply ```python ensemble.py -h```.
 
 ### Important Note
-In ```train.sh```, ```infer.sh``` and ```ensemble.sh``` wherever path is mentioned, make sure that path is relative to the ```fasttext_model/fastText``` folder. Absolute paths will work as well.
+In ```train.sh```, ```infer.sh``` and ```ensemble.sh``` wherever path is mentioned, make sure that path is relative to the ```fasttext_model/fastText``` directory. Absolute paths will work as well.
 
 ## Preprocessing
 
