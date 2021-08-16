@@ -11,7 +11,6 @@ FastText is a module provided by Facebook Research. More information about the m
 The following code should be run in order to initialise the different scripts.
 
 ```bash
-pip install -r requirements.txt
 chmod +x init.sh
 ./init.sh
 ```
@@ -77,7 +76,7 @@ It creates a ```predictions.csv``` with all the predictions for each input case 
 Note: The aforementioned flags are optional. For more information, run ```python create_predictions.py --help``` or simply ```python create_predictions.py -h```.
 
 ### ensemble.sh
-This script creates multiple predictions from multiple models that are passed into it. To use it, execute the following command:
+This script creates multiple predictions from multiple models that are passed into it. Multiple models are to be created by calling ```main.py``` multiple times. To use it, execute the following command:
 ```bash
 cd scripts
 ./ensemble.sh path_to_test_corpus.txt 3 PRODUCT_NODE_ID BROWSE_NODE_ID trained_fasttext_model_1.bin trained_fasttext_model_2.bin trained_fasttext_model_3.bin
@@ -85,7 +84,7 @@ cd scripts
 
 Any number of models can be passed as parameters. The second parameter is used to produce n-best predictions. In this case, 3 best predictions with their probabilities would be made. From all the predictions, the most confident prediction is chosen for the final prediction. The next two parameters are the headers, as explained in ```create_predictions.py```. Setting them to ```_``` will cause the program to use the default value.
 
-Multiple intermediate files are created which get deleted at the end. These are ```predictions_1.txt```, ```predictions_2.txt``` etc.
+Multiple intermediate files are created. These are ```predictions_1.txt```, ```predictions_2.txt``` etc.
 
 Finally, a ```predictions.csv``` would be created with all the predictions for each input case along with a serial number.
 
