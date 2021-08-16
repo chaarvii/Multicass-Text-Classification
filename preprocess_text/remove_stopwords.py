@@ -5,7 +5,7 @@ import re
 import spacy
 from spacy.lang.en import STOP_WORDS
 from spacy.lang.en import English
-nlp = English()
+nlp = spacy.load('en_core_web_sm')
 stops = STOP_WORDS
 
 def remove_stopwords(product_detail:str):
@@ -19,8 +19,8 @@ def remove_stopwords(product_detail:str):
             cleaned string in fasttext format
     '''
     # tokenising the text 
-    tokenizer = nlp.Defaults.create_tokenizer(nlp)
-    tokens = tokenizer(product_detail)
+    tokenizer = nlp.tokenizer
+    tokens = nlp(product_detail)
     words = list()
 
     # removing stopwords 

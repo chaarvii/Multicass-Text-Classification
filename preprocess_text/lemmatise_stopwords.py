@@ -5,7 +5,7 @@ import re
 import spacy
 from spacy.lang.en import STOP_WORDS
 from spacy.lang.en import English
-nlp = English()
+nlp = spacy.load('en_core_web_sm')
 stops = STOP_WORDS
 
 def lemmatise_text(product_detail:str,remove_stopwords:bool):
@@ -24,15 +24,14 @@ def lemmatise_text(product_detail:str,remove_stopwords:bool):
     '''
     # tokenising the text 
     tokenizer = nlp.tokenizer
-    tokens = tokenizer(product_detail)
+    tokens = nlp(product_detail)
     lemmatized = list()
-
     # performing lemmatisation and stemming, removing stopwords if true
+    
     for word in tokens:
-        lemma = word.lemma_.strip()
+        lemma = word.lemma_
         if lemma:
             if not remove_stopwords or (remove_stopwords and lemma not in stops):
                 lemmatized.append(lemma)
-
     #converting list back to string
     return " ".join(lemmatized)

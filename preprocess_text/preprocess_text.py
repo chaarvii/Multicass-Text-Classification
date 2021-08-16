@@ -49,14 +49,15 @@ def preprocess_text(input_file:str,output_file:str,remove_html_tag:bool,remove_d
 			data = remove_numbers(data)
 		if remove_emoji == True:
 			data = remove_emoji(remove_emoticon)
-
 		if lemmatise == True:
 			data = lemmatise_text(data,remove_stopwords)
 		elif remove_stopwords == True:
 			data = remove_stopwords(data)
-
+		#print(data)
 		#Appending processed text to output file
-		file.write(data)
+		final_data = data + " " + label
+		file.write(final_data)
+
 	file.close()
 	f_train.close()
 	return output_file
