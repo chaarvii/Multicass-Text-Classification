@@ -4,7 +4,7 @@ import random
 import re
 import spacy
 from spacy.lang.en import STOP_WORDS
-nlp = spacy.load("en")
+nlp = spacy.load("en_core_web_sm")
 stops = STOP_WORDS
 
 def lemmatise_text(product_detail:str,remove_stopwords:bool):
