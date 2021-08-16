@@ -29,11 +29,11 @@ def main(train_csv: str, test_csv: str, model_name: str, remove_html: bool, remo
 	os.chdir('fasttext_model/scripts')
 	os.system('./build_fasttext.sh')
 	print('Beginning Training')
-	os.system(f'./train.sh ../../dataset/{model_name}_train_cleaned.txt ../models/{model_name}')
+	os.system(f'./train.sh ../../dataset/{model_name}_train_cleaned.txt ../../models/{model_name}')
 	print('Training Completed')
 	print('---')
 	print('Beginning Inference')
-	os.system(f'./infer.sh ../models/{model_name}.bin ../../dataset/{model_name}_test_cleaned.txt')
+	os.system(f'./infer.sh ../../models/{model_name}.bin ../../dataset/{model_name}_test_cleaned.txt')
 	print('Inference Completed')
 
 if __name__ == '__main__':

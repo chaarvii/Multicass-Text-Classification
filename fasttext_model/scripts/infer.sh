@@ -5,4 +5,5 @@ echo "Starting Inferencing"
 echo "Completed Inferencing - check predictions.txt"
 cd ..
 python create_predictions.py
-echo "Check predictions.csv"
+mv predictions* ../results
+echo "Check predictions.csv in results"
