@@ -11,7 +11,7 @@ FastText is a module provided by Facebook Research. More information about the m
 The following code should be run in order to initialise the different scripts.
 
 ```bash
-cd scripts
+cd fasttext_model
 chmod +x init.sh
 ./init.sh
 cd ..
