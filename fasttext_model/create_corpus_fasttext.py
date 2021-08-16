@@ -2,8 +2,9 @@ from tqdm import tqdm
 import csv
 import pandas as pd
 import argparse
+import os
 
-def create_corpus_fasttext(train_csv, train_corpus, output):
+def create_corpus_fasttext(train_csv, train_corpus, output, model_name):
 	'''
 		This program appends the labels in the format expected by fasttext
 		Arguments:
@@ -18,10 +19,10 @@ def create_corpus_fasttext(train_csv, train_corpus, output):
 	# Reading and opening the required files
 	df = pd.read_csv(train_csv, escapechar = "\\", quoting = csv.QUOTE_NONE)
 	corpus = open(train_corpus)
+	os.system(f'rm {output}')
 	output_labels = open(output, 'a')
 	label = df.keys()[-1]
 	lines = corpus.readlines()
-	print(lines[-1])
 
 	# Appending the labels to the output txt file
 	for idx,line in enumerate(tqdm(lines)):
