@@ -3,6 +3,11 @@ import csv
 import pandas as pd
 import argparse
 
+from clean_text import clean_text
+from remove_numbers import remove_numbers
+from remove_emoji import remove_emoji
+from lemmatise_stopwords import lemmatise_text
+
 def preprocess_text(input_file:str,output_file:str,remove_html_tag:bool,remove_digit:bool,remove_emoticon:bool,remove_stopwords:bool):
     '''
             This function performs text preprocessing on the data. 
@@ -53,10 +58,10 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 	parser.add_argument('--input', type = str, default = 'dataset/train.txt', help = 'Path to the text file in fasttext format')
 	parser.add_argument('--output', type = str, default = 'cleaned_text.txt', help = 'Path to the output file')
-	parser.add_argument('--remove_html', type = bool, default = True, help = 'removes html tags from text, True by default')
-    	parser.add_argument('--remove_digit', type = bool, default = True, help = 'removes numbers from text, True by default')
-    	parser.add_argument('--remove_emoticon', type = bool, default = True, help = 'removes emojis from text, True by default')
-    	parser.add_argument('--remove_stopwords', type = bool, default = True, help = 'removes stopwords from text, True by default')
-    	args = parser.parse_args()
+	parser.add_argument('--remove_html', type = bool, default = True, help = 'Removes html tags from text')
+	parser.add_argument('--remove_digit', type = bool, default = True, help = 'Removes numbers from text')
+	parser.add_argument('--remove_emoticon', type = bool, default = True, help = 'Removes emojis from text')
+	parser.add_argument('--remove_stopwords', type = bool, default = True, help = 'Removes stopwords from text')
+	args = parser.parse_args()
 
-    	preprocess_text(args['input'], args['output'], args['remove_html'],args['remove_digit'],args['remove_digit'],args['remove_emoticon'],args['remove_stopwords'])
+	preprocess_text(args.input, args.output, args.remove_html,args.remove_digit,args.remove_digit,args.remove_emoticon,args.remove_stopwords)
