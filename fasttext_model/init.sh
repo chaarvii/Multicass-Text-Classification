@@ -7,6 +7,6 @@ chmod +x ./scripts/ensemble.sh
 cd scripts
 ./build_fasttext.sh
 python -m spacy download en_core_web_sm
-mkdir ../models
-mkdir ../dataset
-mkdir ../results
+mkdir ../../models
+mkdir ../../dataset
+mkdir ../../results
