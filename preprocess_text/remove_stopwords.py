@@ -1,4 +1,4 @@
-mport numpy as np
+import numpy as np
 from tqdm import tqdm
 import random
 import re
@@ -24,7 +24,7 @@ def remove_stopwords(product_detail:str):
 
     # removing stopwords 
     for word in tokens:
-        if word not in stops):
+        if word not in stops:
             words.append(word)
 
     #converting list back to string
