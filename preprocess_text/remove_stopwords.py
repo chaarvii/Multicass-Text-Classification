@@ -4,7 +4,8 @@ import random
 import re
 import spacy
 from spacy.lang.en import STOP_WORDS
-nlp = spacy.load("en_core_web_sm")
+from spacy.lang.en import English
+nlp = English()
 stops = STOP_WORDS
 
 def remove_stopwords(product_detail:str):
