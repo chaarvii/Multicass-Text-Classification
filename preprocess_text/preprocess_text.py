@@ -8,7 +8,7 @@ from remove_numbers import remove_numbers
 from remove_emoji import remove_emoji
 from lemmatise_stopwords import lemmatise_text
 
-def preprocess_text(input_file:str,output_file:str,remove_html_tag:bool,remove_digit:bool,remove_emoticon:bool,remove_stopwords:bool):
+def preprocess_text(input_file:str,output_file:str,remove_html_tag:bool,remove_digit:bool,remove_emoticon:bool,remove_stopwords:bool,lemmatise:bool):
     '''
             This function performs text preprocessing on the data. 
             The workflow is as follows:
@@ -17,7 +17,7 @@ def preprocess_text(input_file:str,output_file:str,remove_html_tag:bool,remove_d
             3. Remove html tags (optional)
             4. Remove numbers (optional)
             5. Remove emoji (optional)
-            6. Lemmatisation and Stemming 
+            6. Lemmatisation and Stemming (optional)
             7. Remove Stopwords (optional)
             Arguments:
             input_file: string which has the path to .txt file containing data to be preprocessed in fasttext format
@@ -26,6 +26,7 @@ def preprocess_text(input_file:str,output_file:str,remove_html_tag:bool,remove_d
             remove_digit: boolean, if true, numbers are removed from the data 
             remove_emoticon: boolean, if true, emojis are removed from the data
             remove_stopwords: boolean,if true, stopwords are removed from the data 
+            lemmatise: boolean,if true, lemmatisation is done
 
             Output:
             output_file: String which returns the name of the output file, ready for training
@@ -46,7 +47,11 @@ def preprocess_text(input_file:str,output_file:str,remove_html_tag:bool,remove_d
             data = remove_numbers(data)
         if remove_emoji == True:
             data = remove_emoji(remove_emoticon)
-        data = lemmatise_text(data,remove_stopwords)
+
+        if lemmatise == True:
+            data = lemmatise_text(data,remove_stopwords)
+        elif remove_stopwords == True:
+            data = remove_stopwords(data)
 
         #Appending processed text to output file
         file.write(data)
@@ -55,13 +60,14 @@ def preprocess_text(input_file:str,output_file:str,remove_html_tag:bool,remove_d
     return output_file
 
 if __name__ == '__main__':
-	parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-	parser.add_argument('--input', type = str, default = 'dataset/train.txt', help = 'Path to the text file in fasttext format')
-	parser.add_argument('--output', type = str, default = 'cleaned_text.txt', help = 'Path to the output file')
-	parser.add_argument('--remove_html', type = bool, default = True, help = 'Removes html tags from text')
-	parser.add_argument('--remove_digit', type = bool, default = True, help = 'Removes numbers from text')
-	parser.add_argument('--remove_emoticon', type = bool, default = True, help = 'Removes emojis from text')
-	parser.add_argument('--remove_stopwords', type = bool, default = True, help = 'Removes stopwords from text')
-	args = parser.parse_args()
+	    parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+	    parser.add_argument('--input', type = str, default = 'dataset/train.txt', help = 'Path to the text file in fasttext format')
+	    parser.add_argument('--output', type = str, default = 'cleaned_text.txt', help = 'Path to the output file')
+	    parser.add_argument('--remove_html', type = bool, default = True, help = 'Removes html tags from text')
+    	parser.add_argument('--remove_digit', type = bool, default = True, help = 'Removes numbers from text')
+    	parser.add_argument('--remove_emoticon', type = bool, default = True, help = 'Removes emojis from text')
+    	parser.add_argument('--remove_stopwords', type = bool, default = True, help = 'Removes stopwords from text')
+        parser.add_argument('--lemmatise', type = bool, default = True, help = 'Performs lemmatisation')
+    	args = parser.parse_args()
 
-	preprocess_text(args.input, args.output, args.remove_html,args.remove_digit,args.remove_digit,args.remove_emoticon,args.remove_stopwords)
+    	preprocess_text(args.input, args.output, args.remove_html,args.remove_digit,args.remove_digit,args.remove_emoticon,args.remove_stopwords,args.lemmatise)
