@@ -23,7 +23,7 @@ def lemmatise_text(product_detail:str,remove_stopwords:bool):
             cleaned string in fasttext format
     '''
     # tokenising the text 
-    tokenizer = nlp.Defaults.create_tokenizer(nlp)
+    tokenizer = nlp.tokenizer
     tokens = tokenizer(product_detail)
     lemmatized = list()
 
